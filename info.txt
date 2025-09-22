@@ -1,0 +1,2 @@
+result.data == main data
+result.data.city.name = city name

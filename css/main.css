@@ -1,0 +1,52 @@
+.forecast{
+    display: flex;
+    justify-content: space-between;
+    gap: 1%;
+}
+
+
+.city{
+    margin-top: 10vh;
+}
+
+.zip-form{
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 1%
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+button{
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 1%
+}
+
+.bg { 
+    background: linear-gradient(rgb(38, 0, 255),rgb(0, 110, 255),rgb(0, 110, 255), white);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.btn{
+    background-color:rgb(38, 0, 255);
+    color: white;
+}
+
+.icon{
+    margin: 0 auto;
+}
+
+.wi-fw{
+    font-size: 2rem;
+}
+
+.city{
+    color: white
+}
+
+
