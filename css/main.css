@@ -1,10 +1,28 @@
+/* keep it simple; stop background rules from fighting */
+
+:root {
+  --ink: #222;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  color: var(--ink);
 }
 
+/* put BOTH gradient + photo here; path is from /css → /images */
 .bg {
-  background: linear-gradient(to bottom, #1e3c72, #2a5298, #1e3c72);
+  background: linear-gradient(
+      to bottom,
+      rgba(30, 60, 114, 0.55),
+      rgba(42, 82, 152, 0.55)
+    ),
+    url("../images/weather-bg.avif") no-repeat center center fixed;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -24,7 +42,6 @@ body {
 h1 {
   margin-top: 0;
 }
-
 form {
   margin-bottom: 0.75rem;
 }
@@ -73,22 +90,22 @@ button:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* explicit color classes so styles never disappear */
+/* original colors — keep the “basic” look */
 .high-card {
   background: #49a7df;
-} /* calmer cyan for high */
+}
 .low-card {
   background: #4caf50;
-} /* green */
+}
 .forecast-card {
   background: #6ec1e4;
-} /* light teal */
+}
 .humidity-card {
   background: #66bb6a;
-} /* green variant */
+}
 .coords-card {
   background: #7e57c2;
-} /* purple for coords */
+}
 
 .error {
   color: #e53935;
@@ -119,7 +136,6 @@ button:hover {
   margin-top: 0.75rem;
 }
 
-/* mini forecast cards reuse .card for color/shadow, then neutralize text */
 .mini-card {
   color: #222;
   background: #fff;
@@ -133,4 +149,10 @@ button:hover {
 .mini-card p {
   margin: 0.25rem 0;
   font-weight: 500;
+}
+.mini-card img.wx-icon {
+  width: 56px;
+  height: 56px;
+  display: block;
+  margin: 0.25rem auto 0.5rem;
 }

@@ -1,4 +1,5 @@
 // Read API key from local config (config.local.js). Fallback to placeholder.
+// — keeping this pattern so we can ship to GitHub safely later.
 const API_KEY = window.OPENWEATHER_API_KEY || "YOUR_API_KEY_HERE";
 
 let unit = "imperial";
@@ -11,6 +12,7 @@ const forecastBtn = document.getElementById("forecast-btn");
 
 unitSelect.addEventListener("change", () => {
   unit = unitSelect.value;
+  // NOTE: not auto-refreshing the current city on unit change — simple first.
 });
 
 form.addEventListener("submit", async (e) => {
@@ -18,8 +20,9 @@ form.addEventListener("submit", async (e) => {
   const cityOrZip = cityInput.value.trim();
   if (!cityOrZip) return;
 
-  // clear labels / forecast on new search
+  // reset forecast/results on new search
   document.getElementById("forecast-container").innerHTML = "";
+  document.getElementById("forecast-cards").hidden = true;
   document.getElementById("error").hidden = true;
 
   if (/^\d+$/.test(cityOrZip)) {
@@ -65,12 +68,13 @@ function updateWeather(data) {
   const loc = `${data.name}, ${data.sys.country}`;
   document.getElementById("locationLabel").textContent = loc;
 
-  document.getElementById("high").textContent = `${data.main.temp_max} °${
-    unit === "imperial" ? "F" : "C"
-  }`;
-  document.getElementById("low").textContent = `${data.main.temp_min} °${
-    unit === "imperial" ? "F" : "C"
-  }`;
+  // rounding temps for cleaner look
+  const hi = Math.round(data.main.temp_max);
+  const lo = Math.round(data.main.temp_min);
+  const u = unit === "imperial" ? "F" : "C";
+
+  document.getElementById("high").textContent = `${hi} °${u}`;
+  document.getElementById("low").textContent = `${lo} °${u}`;
   document.getElementById("forecast").textContent = data.weather[0].description;
   document.getElementById("humidity").textContent = `${data.main.humidity}%`;
 }
@@ -103,28 +107,56 @@ async function fetchForecast(lat, lon) {
     const container = document.getElementById("forecast-container");
     container.innerHTML = "";
 
-    // group entries by date and take the first entry for each day
-    const byDate = {};
+    // === Trying improvement here (can revert): compute daily min/max ===
+    // Group 3h blocks by local date
+    const groups = new Map();
     for (const item of data.list) {
       const key = new Date(item.dt_txt).toLocaleDateString();
-      if (!byDate[key]) byDate[key] = item;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(item);
     }
-    const days = Object.values(byDate).slice(0, 3);
 
-    days.forEach((day) => {
+    // Take the next 3 distinct days
+    const days = [...groups.keys()].slice(0, 3);
+
+    days.forEach((dateKey) => {
+      const items = groups.get(dateKey);
+
+      // min of temp_min, max of temp_max across the day
+      const min = Math.round(Math.min(...items.map((i) => i.main.temp_min)));
+      const max = Math.round(Math.max(...items.map((i) => i.main.temp_max)));
+
+      // pick an icon from around midday if present, else first item
+      let pick = items.find((i) => /12:00:00/.test(i.dt_txt)) || items[0];
+      const iconCode = pick.weather[0].icon;
+      const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
       const wrap = document.createElement("div");
-      wrap.className = "mini-card card"; // ensure themed style
+      wrap.className = "mini-card card"; // reuse shadows
 
+      const u = unit === "imperial" ? "F" : "C";
       wrap.innerHTML = `
-        <h4>${new Date(day.dt_txt).toLocaleDateString()}</h4>
-        <p>${day.main.temp_min} / ${day.main.temp_max} °${
-        unit === "imperial" ? "F" : "C"
-      }</p>
-        <p>${day.weather[0].description}</p>
+        <h4>${dateKey}</h4>
+        <img class="wx-icon" src="${iconUrl}" alt="${pick.weather[0].main}" />
+        <p>${min} / ${max} °${u}</p>
+        <p>${pick.weather[0].description}</p>
       `;
       container.appendChild(wrap);
     });
+
+    // reveal section header only when data exists
+    document.getElementById("forecast-cards").hidden = days.length === 0;
   } catch (err) {
     console.error("Forecast error:", err.message);
   }
 }
+
+/* === Parking lot (future if Dylan extends) ===
+- Geolocation button (navigator.geolocation) → use coords directly.
+- Persist last search + unit in localStorage; auto-load on refresh.
+- Add sunrise/sunset chips (sys.sunrise/sunset via /weather).
+- “Feels like” and wind speed badges under the main location line.
+- °F/°C toggle should refetch and re-render immediately.
+- Simple skeleton/loading state on search and forecast clicks.
+- Error states per field (zip vs city) with inline notes.
+*/

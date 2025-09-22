@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <!-- path fix: css lives at project root -->
     <link rel="stylesheet" href="css/main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
     />
   </head>
+  <!-- keep class=bg so we can layer gradient + photo in CSS -->
   <body class="bg">
     <div class="container">
       <h1>Weather App</h1>
@@ -64,7 +66,8 @@
         <button id="forecast-btn">Get 3-Day Forecast</button>
       </div>
 
-      <section id="forecast-cards" class="forecast-grid">
+      <!-- show header only when we actually have forecast -->
+      <section id="forecast-cards" class="forecast-grid" hidden>
         <h2>3-Day Forecast</h2>
         <div id="forecast-container"></div>
       </section>
