@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="css/main.css" />
-    <!-- commit 3: adding icons, using weather-icons cdn -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
@@ -25,8 +24,16 @@
         <button type="submit">Search</button>
       </form>
 
+      <!-- commit 4: trying out dropdown to switch between Fahrenheit and Celsius -->
+      <div class="unit-toggle">
+        <label for="unitSelect">Units:</label>
+        <select id="unitSelect">
+          <option value="imperial" selected>Fahrenheit (°F)</option>
+          <option value="metric">Celsius (°C)</option>
+        </select>
+      </div>
+
       <section id="results" class="cards">
-        <!-- commit 3: adding icons next to labels -->
         <div class="card">
           <h3><i class="wi wi-thermometer"></i> High</h3>
           <p id="high">—</p>

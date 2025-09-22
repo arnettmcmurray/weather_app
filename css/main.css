@@ -44,6 +44,11 @@ button:hover {
   background-color: #1e3c72;
 }
 
+/* commit 4: styling dropdown */
+.unit-toggle {
+  margin: 0.5rem 0 1rem;
+}
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -52,21 +57,22 @@ button:hover {
 }
 
 .card {
-  background: #fff;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   text-align: center;
-}
-
-.card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.2rem;
+  color: #fff;
   font-weight: bold;
 }
 
+.card:nth-child(1) {
+  background: #d9534f;
+}
+.card:nth-child(2) {
+  background: #0275d8;
+}
+.card:nth-child(3) {
+  background: #5bc0de;
+}
+.card:nth-child(4) {
+  background: #5cb85c;
+}
