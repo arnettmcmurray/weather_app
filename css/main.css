@@ -1,52 +1,72 @@
-.forecast{
-    display: flex;
-    justify-content: space-between;
-    gap: 1%;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-
-.city{
-    margin-top: 10vh;
+.bg {
+  background: linear-gradient(to bottom, #1e3c72, #2a5298, #ffffff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2rem;
 }
 
-.zip-form{
-    width: 40%;
-    margin: 0 auto;
-    margin-top: 1%
-}
-form{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-}
-button{
-    width: 30%;
-    margin: 0 auto;
-    margin-top: 1%
+.container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
 }
 
-.bg { 
-    background: linear-gradient(rgb(38, 0, 255),rgb(0, 110, 255),rgb(0, 110, 255), white);
-    height: 100%;
-    position: absolute;
-    width: 100%;
+form {
+  margin-bottom: 1rem;
 }
 
-.btn{
-    background-color:rgb(38, 0, 255);
-    color: white;
+input {
+  padding: 0.5rem;
+  width: 70%;
+  margin-right: 0.5rem;
 }
 
-.icon{
-    margin: 0 auto;
+button {
+  padding: 0.5rem 1rem;
+  background-color: #2a5298;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.wi-fw{
-    font-size: 2rem;
+button:hover {
+  background-color: #1e3c72;
 }
 
-.city{
-    color: white
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 
