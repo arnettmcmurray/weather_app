@@ -4,25 +4,29 @@ body {
 }
 
 .bg {
-  background: linear-gradient(to bottom, #1e3c72, #2a5298, #ffffff);
+  background: linear-gradient(to bottom, #1e3c72, #2a5298, #1e3c72);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 2rem;
+  padding: 2rem 0;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(245, 247, 250, 0.96);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  width: 640px;
   text-align: center;
 }
 
+h1 {
+  margin-top: 0;
+}
+
 form {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 input {
@@ -39,40 +43,94 @@ button {
   border-radius: 6px;
   cursor: pointer;
 }
-
 button:hover {
   background-color: #1e3c72;
 }
 
-/* commit 4: styling dropdown */
 .unit-toggle {
-  margin: 0.5rem 0 1rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.location {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.75rem;
 }
 
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .card {
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: center;
   color: #fff;
-  font-weight: bold;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.card:nth-child(1) {
-  background: #d9534f;
+/* explicit color classes so styles never disappear */
+.high-card {
+  background: #49a7df;
+} /* calmer cyan for high */
+.low-card {
+  background: #4caf50;
+} /* green */
+.forecast-card {
+  background: #6ec1e4;
+} /* light teal */
+.humidity-card {
+  background: #66bb6a;
+} /* green variant */
+.coords-card {
+  background: #7e57c2;
+} /* purple for coords */
+
+.error {
+  color: #e53935;
 }
-.card:nth-child(2) {
-  background: #0275d8;
+
+.forecast-trigger {
+  margin: 1rem 0;
 }
-.card:nth-child(3) {
-  background: #5bc0de;
+#forecast-btn {
+  padding: 0.5rem 1rem;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
-.card:nth-child(4) {
-  background: #5cb85c;
+#forecast-btn:hover {
+  background-color: #222;
+}
+
+.forecast-grid {
+  margin-top: 1rem;
+}
+#forecast-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* mini forecast cards reuse .card for color/shadow, then neutralize text */
+.mini-card {
+  color: #222;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+.mini-card h4 {
+  margin: 0 0 0.25rem;
+}
+.mini-card p {
+  margin: 0.25rem 0;
+  font-weight: 500;
 }

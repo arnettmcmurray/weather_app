@@ -24,7 +24,6 @@
         <button type="submit">Search</button>
       </form>
 
-      <!-- commit 4: trying out dropdown to switch between Fahrenheit and Celsius -->
       <div class="unit-toggle">
         <label for="unitSelect">Units:</label>
         <select id="unitSelect">
@@ -33,28 +32,49 @@
         </select>
       </div>
 
+      <div id="locationLabel" class="location"></div>
+
       <section id="results" class="cards">
-        <div class="card">
+        <div class="card high-card">
           <h3><i class="wi wi-thermometer"></i> High</h3>
           <p id="high">—</p>
         </div>
-        <div class="card">
+        <div class="card low-card">
           <h3><i class="wi wi-thermometer-exterior"></i> Low</h3>
           <p id="low">—</p>
         </div>
-        <div class="card">
+        <div class="card forecast-card">
           <h3><i class="wi wi-day-sunny"></i> Forecast</h3>
           <p id="forecast">—</p>
         </div>
-        <div class="card">
+        <div class="card humidity-card">
           <h3><i class="wi wi-humidity"></i> Humidity</h3>
           <p id="humidity">—</p>
         </div>
       </section>
 
-      <p id="error" style="color: red" hidden>City not found</p>
+      <section class="cards">
+        <div class="card coords-card">
+          <h3><i class="wi wi-earth"></i> Coordinates</h3>
+          <p id="coords">—</p>
+        </div>
+      </section>
+
+      <div class="forecast-trigger">
+        <button id="forecast-btn">Get 3-Day Forecast</button>
+      </div>
+
+      <section id="forecast-cards" class="forecast-grid">
+        <h2>3-Day Forecast</h2>
+        <div id="forecast-container"></div>
+      </section>
+
+      <p id="error" class="error" hidden>City not found</p>
     </div>
 
+    <!-- KEY: local file (ignored by git) first; example fallback second -->
+    <script src="config.local.js"></script>
+    <script src="config.example.js"></script>
     <script src="index.js" defer></script>
   </body>
 </html>
