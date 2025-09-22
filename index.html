@@ -5,31 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="css/main.css" />
+    <!-- commit 3: adding icons, using weather-icons cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
+    />
   </head>
   <body class="bg">
     <div class="container">
       <h1>Weather App</h1>
 
       <form id="weather-form">
-        <input type="text" id="cityInput" placeholder="Enter city or zip" />
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter city or zip"
+          required
+        />
         <button type="submit">Search</button>
       </form>
 
       <section id="results" class="cards">
+        <!-- commit 3: adding icons next to labels -->
         <div class="card">
-          <h3>High</h3>
+          <h3><i class="wi wi-thermometer"></i> High</h3>
           <p id="high">—</p>
         </div>
         <div class="card">
-          <h3>Low</h3>
+          <h3><i class="wi wi-thermometer-exterior"></i> Low</h3>
           <p id="low">—</p>
         </div>
         <div class="card">
-          <h3>Forecast</h3>
+          <h3><i class="wi wi-day-sunny"></i> Forecast</h3>
           <p id="forecast">—</p>
         </div>
         <div class="card">
-          <h3>Humidity</h3>
+          <h3><i class="wi wi-humidity"></i> Humidity</h3>
           <p id="humidity">—</p>
         </div>
       </section>
