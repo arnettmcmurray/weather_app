@@ -1,0 +1,29 @@
+name: key-guard
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  check-for-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Fail if index.js contains a 32+ char hex-looking token (rough check). Emojis for not repeating this error.
+      - name: Block hex-like API keys
+        run: |
+          if grep -E '[A-Fa-f0-9]{32,}' index.js; then
+            echo "❌ Possible API key found in index.js. Do NOT commit real keys."
+            exit 1
+          fi
+          echo "✅ No raw hex-like key found."
+
+      # Require the placeholder to be present
+      - name: Require placeholder
+        run: |
+          if ! grep -q 'const API_KEY = "YOUR_API_KEY_HERE"' index.js; then
+            echo "❌ Missing placeholder API_KEY line. Use the placeholder before pushing."
+            exit 1
+          fi
+          echo "✅ Placeholder present."
